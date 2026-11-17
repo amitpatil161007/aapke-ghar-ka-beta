@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aapke Ghar Ka Beta — Har Kaam Mein Apnapan</title>
+  <meta name="description" content="Trusted hyper-local concierge and companion service in India for seniors, busy families, and NRIs. Hospital visits, bank errands, tech support, and home supervision." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFFDF9',
+            warmSand: '#FEF6EE',
+            navy: '#1E293B',
+            saffron: '#EA580C',
+            saffronDark: '#C2410C',
+            tealTrust: '#0F766E',
+            tealLight: '#F0FDFA',
+            whatsapp: '#25D366',
+            whatsappDark: '#1EBE5D',
+          },
+          fontFamily: {
+            heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 10px 30px -5px rgba(30, 41, 59, 0.06)',
+            card: '0 4px 20px -2px rgba(234, 88, 12, 0.08)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFDF9;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom subtle pattern for hero backdrop */
+    .hero-pattern {
+      background-image: radial-gradient(rgba(234, 88, 12, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    /* Smooth accordion transition */
+    .faq-content {
+      transition: max-height 0.3s ease-out, opacity 0.25s ease-out;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .faq-item.active .faq-content {
+      max-height: 260px;
+      opacity: 1;
+    }
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-orange-100 selection:text-saffron">
+
+  <!-- ==================== 1. STICKY NAVBAR ==================== -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-orange-100/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Brand Logo & Tagline -->
+        <a href="#" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-saffron to-amber-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+            <!-- Custom Warm Home + Helping Hand SVG -->
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5L12 3l9 7.5" />
+              <path d="M5 9.5V19a2 2 0 002 2h10a2 2 0 002-2V9.5" />
+              <path d="M12 16.5c-2.2-1.6-3.5-2.8-3.5-4.3a2 2 0 013.5-1.3 2 2 0 013.5 1.3c0 1.5-1.3 2.7-3.5 4.3z" fill="currentColor" stroke="none" />
+            </svg>
+          </div>
+          <div>
+            <span class="block font-heading font-extrabold text-lg sm:text-xl text-navy leading-tight tracking-tight">
+              Aapke Ghar Ka <span class="text-saffron">Beta</span>
+            </span>
+            <span class="block text-xs font-medium text-tealTrust tracking-wide">
+              Har Kaam Mein Apnapan
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-slate-700">
+          <a href="#services" class="hover:text-saffron transition-colors">Services</a>
+          <a href="#how-it-works" class="hover:text-saffron transition-colors">How It Works</a>
+          <a href="#trust" class="hover:text-saffron transition-colors">Trust &amp; Safety</a>
+          <a href="#pricing" class="hover:text-saffron transition-colors">Pricing</a>
+          <a href="#faq" class="hover:text-saffron transition-colors">FAQs</a>
+        </nav>
+
+        <!-- Navbar CTA & Mobile Menu Button -->
+        <div class="flex items-center gap-3">
+          <a href="#book-now" class="inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsappDark text-white font-semibold text-sm sm:text-base px-4 sm:px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all">
+            <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 fill-white/20"></i>
+            <span>Book on WhatsApp</span>
+          </a>
+
+          <button id="mobileMenuBtn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl border border-orange-200 text-navy hover:bg-orange-50 transition">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-cream border-t border-orange-100 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+      <a href="#services" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-navy hover:bg-warmSand hover:text-saffron">Services</a>
+      <a href="#how-it-works" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-navy hover:bg-warmSand hover:text-saffron">How It Works</a>
+      <a href="#trust" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-navy hover:bg-warmSand hover:text-saffron">Trust &amp; Safety</a>
+      <a href="#pricing" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-navy hover:bg-warmSand hover:text-saffron">Pricing</a>
+      <a href="#faq" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-navy hover:bg-warmSand hover:text-saffron">FAQs</a>
+    </div>
+  </header>
+
+  <!-- ==================== 2. HERO SECTION ==================== -->
+  <section class="relative overflow-hidden hero-pattern pt-10 pb-16 sm:pt-16 sm:pb-24 border-b border-orange-100/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tealLight border border-teal-200 text-tealTrust text-sm font-semibold">
+            <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+            <span>Trusted by 500+ Senior Citizens &amp; NRI Families</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold text-navy leading-[1.15] tracking-tight">
+            Trusted Help for Your Family, <span class="text-saffron">Just Like Your Own Son</span>
+          </h1>
+
+          <p class="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            Whether it’s accompanying elderly parents to hospital checkups, handling bank errands, fixing smartphone issues, or supervising home repairs — our verified local “Betas” are just one WhatsApp message away.
+          </p>
+
+          <!-- Primary & Secondary CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#book-now" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-saffron hover:bg-saffronDark text-white font-bold text-lg px-8 py-4 rounded-2xl shadow-lg shadow-orange-500/20 hover:-translate-y-0.5 transition-all">
+              <span>Book a Beta Now</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+
+            <button type="button" id="heroQuickWhatsappBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-tealLight text-navy border-2 border-slate-200 hover:border-tealTrust font-semibold text-lg px-7 py-4 rounded-2xl transition-all">
+              <i data-lucide="phone-call" class="w-5 h-5 text-tealTrust"></i>
+              <span>Call / WhatsApp Support</span>
+            </button>
+          </div>
+
+          <!-- 3 Quick Trust Badges -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-4">
+            <div class="flex items-center justify-center lg:justify-start gap-2.5 bg-white/90 border border-orange-100 px-4 py-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 rounded-lg bg-tealLight text-tealTrust flex items-center justify-center shrink-0">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <span class="text-sm font-semibold text-navy">100% Police Verified</span>
+            </div>
+
+            <div class="flex items-center justify-center lg:justify-start gap-2.5 bg-white/90 border border-orange-100 px-4 py-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 rounded-lg bg-green-50 text-whatsappDark flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <span class="text-sm font-semibold text-navy">Live WhatsApp Updates</span>
+            </div>
+
+            <div class="flex items-center justify-center lg:justify-start gap-2.5 bg-white/90 border border-orange-100 px-4 py-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 rounded-lg bg-orange-50 text-saffron flex items-center justify-center shrink-0">
+                <i data-lucide="indian-rupee" class="w-5 h-5"></i>
+              </div>
+              <span class="text-sm font-semibold text-navy">Transparent Hourly Pricing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Card (Warm Family Care Illustration + Live Status Mockup) -->
+        <div class="lg:col-span-5">
+          <div class="relative bg-white rounded-3xl p-6 sm:p-8 border border-orange-100 shadow-soft">
+            <!-- Warm Illustrated Banner SVG -->
+            <div class="rounded-2xl bg-gradient-to-br from-warmSand via-orange-50 to-tealLight p-6 mb-6 border border-orange-100/80">
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-tealTrust bg-white px-3 py-1 rounded-full shadow-sm">
+                  <span class="w-2 h-2 rounded-full bg-whatsapp animate-pulse"></span>
+                  Live Care Update
+                </span>
+                <span class="text-xs font-medium text-slate-500">Today, 10:45 AM</span>
+              </div>
+
+              <!-- Friendly Family Care SVG Graphic -->
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-saffron/10 border border-saffron/20 flex items-center justify-center shrink-0">
+                  <svg class="w-10 h-10 text-saffron" viewBox="0 0 48 48" fill="none">
+                    <circle cx="24" cy="15" r="7" fill="#EA580C" fill-opacity="0.2" stroke="#EA580C" stroke-width="2.5"/>
+                    <path d="M11 39c0-6.627 5.82-12 13-12s13 5.373 13 12" stroke="#EA580C" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M33 17l3 3 6-6" stroke="#0F766E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-heading font-bold text-navy text-base sm:text-lg">
+                    “Rohan (Verified Beta) is with Sharma Uncle at Apollo Clinic”
+                  </p>
+                  <p class="text-sm text-slate-600 mt-1">
+                    Blood test completed. Doctor consultation next. Prescription photo shared on WhatsApp.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Care Highlights -->
+            <div class="space-y-3.5">
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-cream border border-slate-100">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-tealLight text-tealTrust flex items-center justify-center">
+                    <i data-lucide="user-check" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-navy">Respectful, Hindi &amp; English Speaking</p>
+                    <p class="text-xs text-slate-500">Trained in senior care &amp; patience</p>
+                  </div>
+                </div>
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0"></i>
+              </div>
+
+              <div class="flex items-center justify-between p-3.5 rounded-2xl bg-cream border border-slate-100">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-orange-50 text-saffron flex items-center justify-center">
+                    <i data-lucide="globe" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-bold text-navy">Built for Out-of-Town &amp; NRI Children</p>
+                    <p class="text-xs text-slate-500">Book from anywhere, get live photo proof</p>
+                  </div>
+                </div>
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-saffron shrink-0"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. CORE SERVICES GRID ==================== -->
+  <section id="services" class="py-16 sm:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-sm font-bold uppercase tracking-wider text-saffron">How We Help Everyday</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-navy">
+          Everyday Tasks Handled With Care &amp; Respect
+        </h2>
+        <p class="mt-4 text-lg text-slate-600">
+          Select any service below to pre-fill your booking form instantly. No task is too small when it comes to your family’s comfort.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
+        <!-- Service Card 1 -->
+        <div class="service-card group bg-white rounded-3xl p-6 sm:p-7 border-2 border-orange-100/80 hover:border-saffron shadow-soft transition-all flex flex-col justify-between" data-service="Medical & Hospital Companion">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <i data-lucide="stethoscope" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-2.5">Medical &amp; Hospital Companion</h3>
+            <p class="text-slate-600 text-[15px] leading-relaxed mb-5">
+              Door-to-door accompaniment for doctor checkups, waiting in OPD queues, collecting lab reports, and urgent pharmacy runs.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-700 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Clinic &amp; diagnostic visits</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Medicine pickup &amp; bill photo</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Wheelchair &amp; mobility support</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectServiceAndScroll('Medical & Hospital Companion')" class="w-full py-3.5 px-4 rounded-xl bg-warmSand hover:bg-saffron text-saffron hover:text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+            <span>Select Service</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="service-card group bg-white rounded-3xl p-6 sm:p-7 border-2 border-orange-100/80 hover:border-saffron shadow-soft transition-all flex flex-col justify-between" data-service="Bank & Utility Errands">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <i data-lucide="landmark" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-2.5">Bank &amp; Utility Errands</h3>
+            <p class="text-slate-600 text-[15px] leading-relaxed mb-5">
+              Skip long queues and confusing paperwork. We assist seniors at banks, post offices, and government utility centers.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-700 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> KYC updates &amp; life certificate</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Passbook printing &amp; cheque drop</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Electricity, gas &amp; property bills</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectServiceAndScroll('Bank & Utility Errands')" class="w-full py-3.5 px-4 rounded-xl bg-warmSand hover:bg-saffron text-saffron hover:text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+            <span>Select Service</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="service-card group bg-white rounded-3xl p-6 sm:p-7 border-2 border-orange-100/80 hover:border-saffron shadow-soft transition-all flex flex-col justify-between" data-service="Tech & Smartphone Help">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-tealLight text-tealTrust flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <i data-lucide="smartphone" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-2.5">Tech &amp; Smartphone Help</h3>
+            <p class="text-slate-600 text-[15px] leading-relaxed mb-5">
+              Patient, step-by-step help at home for phones, smart TVs, Wi-Fi routers, video calls, and safe digital payments.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-700 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Safe UPI &amp; banking app setup</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Wi-Fi, DTH &amp; Smart TV fixes</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Cab, train &amp; flight ticket booking</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectServiceAndScroll('Tech & Smartphone Help')" class="w-full py-3.5 px-4 rounded-xl bg-warmSand hover:bg-saffron text-saffron hover:text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+            <span>Select Service</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="service-card group bg-white rounded-3xl p-6 sm:p-7 border-2 border-orange-100/80 hover:border-saffron shadow-soft transition-all flex flex-col justify-between" data-service="Home & Vendor Supervision">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+              <i data-lucide="home" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-2.5">Home &amp; Vendor Supervision</h3>
+            <p class="text-slate-600 text-[15px] leading-relaxed mb-5">
+              Never worry about seniors dealing with repairmen alone or carrying heavy bags. We supervise and run errands reliably.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-700 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Supervise plumbers/electricians</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Fresh grocery &amp; hardware runs</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-tealTrust shrink-0"></i> Railway/airport pickup &amp; drop</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectServiceAndScroll('Home & Vendor Supervision')" class="w-full py-3.5 px-4 rounded-xl bg-warmSand hover:bg-saffron text-saffron hover:text-white font-bold text-sm transition-colors flex items-center justify-center gap-2">
+            <span>Select Service</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS (3 SIMPLE STEPS) ==================== -->
+  <section id="how-it-works" class="py-14 sm:py-20 bg-warmSand/70 border-y border-orange-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-sm font-bold uppercase tracking-wider text-tealTrust">Simple &amp; Hassle-Free</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-navy">How Booking Works</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-3xl p-7 border border-orange-100 shadow-sm relative">
+          <div class="w-11 h-11 rounded-2xl bg-saffron text-white font-heading font-extrabold text-lg flex items-center justify-center mb-4">1</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Choose Task &amp; Slot</h3>
+          <p class="text-slate-600 text-[15px] leading-relaxed">
+            Fill out the simple 60-second booking form below with your task details, preferred time slot, and address.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-7 border border-orange-100 shadow-sm relative">
+          <div class="w-11 h-11 rounded-2xl bg-saffron text-white font-heading font-extrabold text-lg flex items-center justify-center mb-4">2</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Instant WhatsApp Confirmation</h3>
+          <p class="text-slate-600 text-[15px] leading-relaxed">
+            Your booking goes straight to our WhatsApp desk. We assign a verified Beta and share his photo &amp; ID badge before arrival.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-7 border border-orange-100 shadow-sm relative">
+          <div class="w-11 h-11 rounded-2xl bg-tealTrust text-white font-heading font-extrabold text-lg flex items-center justify-center mb-4">3</div>
+          <h3 class="text-xl font-bold text-navy mb-2">Live Updates &amp; Easy UPI</h3>
+          <p class="text-slate-600 text-[15px] leading-relaxed">
+            Receive real-time photos and status updates on WhatsApp until the task is complete. Pay seamlessly via UPI after service.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. TRUST & SAFETY SECTION ==================== -->
+  <section id="trust" class="py-16 sm:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-navy rounded-[2rem] p-8 sm:p-12 lg:p-16 text-white shadow-xl relative overflow-hidden">
+        <!-- Decorative soft glow -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-saffron/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-tealTrust/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl mb-12">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+            Your Family’s Safety Comes First
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+            Why Families Trust <span class="text-amber-400">Aapke Ghar Ka Beta</span>
+          </h2>
+          <p class="mt-4 text-slate-300 text-lg leading-relaxed">
+            Inviting someone to assist your parents requires complete confidence. Every single Beta undergoes strict background checks and follows transparent safety protocols.
+          </p>
+        </div>
+
+        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Pillar 1 -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition">
+            <div class="w-12 h-12 rounded-xl bg-tealTrust/30 text-teal-300 flex items-center justify-center mb-4">
+              <i data-lucide="file-check-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Police-Verified Runners</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              100% background-checked team with verified Aadhaar, PAN, local address proof, and clean police clearance certificates.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center mb-4">
+              <i data-lucide="badge-check" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Uniform &amp; QR ID Badge</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Every Beta arrives in clean company uniform with a scannable QR ID card shared with your family on WhatsApp in advance.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition">
+            <div class="w-12 h-12 rounded-xl bg-green-500/20 text-green-300 flex items-center justify-center mb-4">
+              <i data-lucide="camera" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Live Photo &amp; GPS Updates</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Ideal for NRIs &amp; working children: receive arrival selfies, doctor prescriptions, and live location updates on WhatsApp.
+            </p>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center mb-4">
+              <i data-lucide="wallet" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Zero Cash Risk Policy</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              No large cash handling. Pay hospitals, pharmacies, or vendors directly via UPI QR shared with you in real time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. TRANSPARENT PRICING CARDS ==================== -->
+  <section id="pricing" class="py-16 sm:py-24 bg-warmSand/50 border-t border-orange-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-sm font-bold uppercase tracking-wider text-saffron">Honest &amp; Simple Pricing</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-navy">
+          No Hidden Charges, Just Dependable Help
+        </h2>
+        <p class="mt-4 text-lg text-slate-600">
+          Choose a quick single errand, hourly companion support, or a monthly care plan for complete peace of mind.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <!-- Plan 1: Quick Errand -->
+        <div class="bg-white rounded-3xl p-8 border border-orange-100 shadow-soft flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wide">
+              Single Task
+            </span>
+            <h3 class="mt-4 text-2xl font-extrabold text-navy">Quick Errand</h3>
+            <p class="mt-2 text-sm text-slate-600">Best for fast pickups, medicine delivery, or document drop-offs within 5 km.</p>
+
+            <div class="mt-6 pb-6 border-b border-slate-100">
+              <span class="text-4xl font-extrabold text-navy">₹149</span>
+              <span class="text-slate-500 font-medium"> / flat per trip</span>
+            </div>
+
+            <ul class="mt-6 space-y-3.5 text-[15px] text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Covers pickup &amp; drop within 5 km radius</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Pharmacy, grocery, or parcel errand</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Photo proof of receipt &amp; delivery on WhatsApp</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>100% Police-verified Beta assigned</span>
+              </li>
+            </ul>
+          </div>
+
+          <button type="button" onclick="selectPlanAndScroll('Quick Errand (₹149 flat)')" class="mt-8 w-full py-4 px-6 rounded-2xl border-2 border-navy text-navy hover:bg-navy hover:text-white font-bold text-base transition-colors">
+            Choose Quick Errand
+          </button>
+        </div>
+
+        <!-- Plan 2: Hourly Companion (Most Popular) -->
+        <div class="bg-white rounded-3xl p-8 border-2 border-saffron shadow-xl relative flex flex-col justify-between lg:-translate-y-2">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-saffron text-white text-xs font-extrabold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md">
+            Most Popular
+          </div>
+
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-orange-50 text-saffron text-xs font-bold uppercase tracking-wide">
+              Personal Assistance
+            </span>
+            <h3 class="mt-4 text-2xl font-extrabold text-navy">Hourly Companion</h3>
+            <p class="mt-2 text-sm text-slate-600">Ideal for hospital checkups, bank queues, smartphone setup, or repair supervision.</p>
+
+            <div class="mt-6 pb-6 border-b border-orange-100">
+              <span class="text-4xl font-extrabold text-navy">₹199</span>
+              <span class="text-slate-600 font-medium"> first hr + ₹99/extra hr</span>
+            </div>
+
+            <ul class="mt-6 space-y-3.5 text-[15px] text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-saffron shrink-0 mt-0.5"></i>
+                <span>Dedicated companion stays with your family</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-saffron shrink-0 mt-0.5"></i>
+                <span>Hospital OPD, bank visits &amp; home tech support</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-saffron shrink-0 mt-0.5"></i>
+                <span>Live WhatsApp location &amp; doctor/bill updates</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-saffron shrink-0 mt-0.5"></i>
+                <span>Pay easily via UPI after task completion</span>
+              </li>
+            </ul>
+          </div>
+
+          <button type="button" onclick="selectPlanAndScroll('Hourly Companion (₹199 1st hr + ₹99/hr)')" class="mt-8 w-full py-4 px-6 rounded-2xl bg-saffron hover:bg-saffronDark text-white font-bold text-base shadow-lg shadow-orange-500/20 transition-all">
+            Choose Hourly Companion
+          </button>
+        </div>
+
+        <!-- Plan 3: Monthly Family Care Plan -->
+        <div class="bg-white rounded-3xl p-8 border border-teal-200 shadow-soft flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-tealLight text-tealTrust text-xs font-bold uppercase tracking-wide">
+              Best for NRIs &amp; Out-of-Town Kids
+            </span>
+            <h3 class="mt-4 text-2xl font-extrabold text-navy">Monthly Family Care</h3>
+            <p class="mt-2 text-sm text-slate-600">Regular check-ins and scheduled support for parents living independently.</p>
+
+            <div class="mt-6 pb-6 border-b border-slate-100">
+              <span class="text-4xl font-extrabold text-navy">₹1,499</span>
+              <span class="text-slate-500 font-medium"> / month</span>
+            </div>
+
+            <ul class="mt-6 space-y-3.5 text-[15px] text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span><strong>4 scheduled visits</strong> per month (up to 2 hrs each)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Same familiar Beta assigned for continuity</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Priority same-day emergency dispatch</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-tealTrust shrink-0 mt-0.5"></i>
+                <span>Dedicated WhatsApp family group updates</span>
+              </li>
+            </ul>
+          </div>
+
+          <button type="button" onclick="selectPlanAndScroll('Monthly Family Care Plan (₹1,499/mo)')" class="mt-8 w-full py-4 px-6 rounded-2xl bg-tealTrust hover:bg-teal-800 text-white font-bold text-base transition-colors">
+            Choose Monthly Care Plan
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. INTERACTIVE BOOKING FORM + LIVE WHATSAPP PREVIEW ==================== -->
+  <section id="book-now" class="py-16 sm:py-24 bg-cream border-t border-orange-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-sm font-bold uppercase tracking-wider text-whatsappDark">Instant WhatsApp Booking</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-navy">
+          Book Your Beta in 60 Seconds
+        </h2>
+        <p class="mt-3 text-lg text-slate-600">
+          Fill in the details below. Your booking message is formatted live and sent directly to our WhatsApp desk for instant confirmation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        
+        <!-- Left: Booking Form (7 Cols) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-9 border border-orange-100 shadow-soft">
+          <form id="bookingForm" novalidate class="space-y-6">
+            
+            <!-- Row 1: Full Name & Phone -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="fullName" class="block text-sm font-bold text-navy mb-2">
+                  Your Full Name <span class="text-rose-500">*</span>
+                </label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g. Rajesh Kulkarni"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition" />
+                <p id="err-fullName" class="hidden mt-1.5 text-xs font-medium text-rose-600">Please enter your full name.</p>
+              </div>
+
+              <div>
+                <label for="customerPhone" class="block text-sm font-bold text-navy mb-2">
+                  Your WhatsApp / Phone Number <span class="text-rose-500">*</span>
+                </label>
+                <input type="tel" id="customerPhone" name="customerPhone" placeholder="e.g. +91 98230 12345"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition" />
+                <p id="err-customerPhone" class="hidden mt-1.5 text-xs font-medium text-rose-600">Please enter a valid 10-digit phone number.</p>
+              </div>
+            </div>
+
+            <!-- Row 2: Booking For & Service Category -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="bookingFor" class="block text-sm font-bold text-navy mb-2">
+                  Who is this booking for?
+                </label>
+                <select id="bookingFor" name="bookingFor"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy bg-white focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition">
+                  <option value="My Parents / Elderly">My Parents / Elderly</option>
+                  <option value="Myself">Myself</option>
+                  <option value="Family Member / Relative">Family Member / Relative</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="serviceCategory" class="block text-sm font-bold text-navy mb-2">
+                  Service Category <span class="text-rose-500">*</span>
+                </label>
+                <select id="serviceCategory" name="serviceCategory"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy bg-white focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition">
+                  <option value="Medical & Hospital Companion">Medical &amp; Hospital Companion</option>
+                  <option value="Bank & Utility Errands">Bank &amp; Utility Errands</option>
+                  <option value="Tech & Smartphone Help">Tech &amp; Smartphone Help</option>
+                  <option value="Home & Vendor Supervision">Home &amp; Vendor Supervision</option>
+                  <option value="Custom Errand / Other Help">Custom Errand / Other Help</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Selected Pricing Plan Badge (Optional/Auto-filled when user clicks a pricing card) -->
+            <div>
+              <label for="selectedPlan" class="block text-sm font-bold text-navy mb-2">
+                Preferred Pricing Option
+              </label>
+              <select id="selectedPlan" name="selectedPlan"
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy bg-white focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition">
+                <option value="Hourly Companion (₹199 1st hr + ₹99/hr)">Hourly Companion (₹199 1st hr + ₹99/hr)</option>
+                <option value="Quick Errand (₹149 flat)">Quick Errand (₹149 flat within 5 km)</option>
+                <option value="Monthly Family Care Plan (₹1,499/mo)">Monthly Family Care Plan (₹1,499/mo)</option>
+              </select>
+            </div>
+
+            <!-- Row 3: Preferred Date & Time Slot -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="preferredDate" class="block text-sm font-bold text-navy mb-2">
+                  Preferred Date <span class="text-rose-500">*</span>
+                </label>
+                <input type="date" id="preferredDate" name="preferredDate"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy bg-white focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition" />
+                <p id="err-preferredDate" class="hidden mt-1.5 text-xs font-medium text-rose-600">Please select a preferred date.</p>
+              </div>
+
+              <div>
+                <label for="timeSlot" class="block text-sm font-bold text-navy mb-2">
+                  Preferred Time Slot
+                </label>
+                <select id="timeSlot" name="timeSlot"
+                  class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy bg-white focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition">
+                  <option value="Morning (9:00 AM – 12:00 PM)">Morning (9:00 AM – 12:00 PM)</option>
+                  <option value="Afternoon (12:00 PM – 4:00 PM)">Afternoon (12:00 PM – 4:00 PM)</option>
+                  <option value="Evening (4:00 PM – 8:00 PM)">Evening (4:00 PM – 8:00 PM)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 4: Area / Landmark / Address -->
+            <div>
+              <label for="address" class="block text-sm font-bold text-navy mb-2">
+                Area / Landmark / Full Address <span class="text-rose-500">*</span>
+              </label>
+              <input type="text" id="address" name="address" placeholder="e.g. Flat 302, Shanti Residency, Near City Hospital, Tilakwadi"
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition" />
+              <p id="err-address" class="hidden mt-1.5 text-xs font-medium text-rose-600">Please enter the pickup or visit address/landmark.</p>
+            </div>
+
+            <!-- Row 5: Special Instructions -->
+            <div>
+              <label for="instructions" class="block text-sm font-bold text-navy mb-2">
+                Special Instructions <span class="text-slate-400 font-normal">(Optional)</span>
+              </label>
+              <textarea id="instructions" name="instructions" rows="3" placeholder="e.g. My father has a 10:30 AM appointment with Dr. Deshmukh. Please carry his old file."
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-base text-navy placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saffron focus:border-saffron transition"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+              class="w-full py-4 px-6 rounded-2xl bg-whatsapp hover:bg-whatsappDark text-white font-extrabold text-lg shadow-lg shadow-green-500/25 flex items-center justify-center gap-3 hover:-translate-y-0.5 transition-all">
+              <i data-lucide="send" class="w-5 h-5"></i>
+              <span>Confirm &amp; Send via WhatsApp</span>
+            </button>
+
+            <p class="text-center text-xs text-slate-500">
+              No advance payment required. Our coordinator will confirm your Beta within 10 minutes on WhatsApp.
+            </p>
+          </form>
+        </div>
+
+        <!-- Right: Live WhatsApp Message Preview & Founder Test Config (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Live WhatsApp Preview Card -->
+          <div class="bg-[#EFEAE2] rounded-3xl border border-stone-300/80 shadow-soft overflow-hidden">
+            <!-- WhatsApp Top Bar -->
+            <div class="bg-[#075E54] text-white px-5 py-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-saffron flex items-center justify-center font-heading font-bold text-white text-sm">
+                  AGB
+                </div>
+                <div>
+                  <p class="font-bold text-sm leading-tight flex items-center gap-1.5">
+                    Aapke Ghar Ka Beta Desk
+                    <i data-lucide="badge-check" class="w-4 h-4 text-green-300"></i>
+                  </p>
+                  <p class="text-[11px] text-emerald-100">Online • Live Message Preview</p>
+                </div>
+              </div>
+              <button type="button" id="copyPreviewBtn" title="Copy formatted message" class="text-xs bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-lg font-medium flex items-center gap-1.5 transition">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <!-- Chat Bubble Area -->
+            <div class="p-5 sm:p-6 space-y-3">
+              <div class="text-center">
+                <span class="inline-block bg-white/80 text-slate-600 text-[11px] font-medium px-3 py-1 rounded-full shadow-sm">
+                  This exact message will open in WhatsApp
+                </span>
+              </div>
+
+              <!-- Outgoing Green WhatsApp Message Bubble -->
+              <div class="bg-[#D9FDD3] text-slate-800 rounded-2xl rounded-tr-sm p-4 shadow-sm border border-green-200/70 ml-auto max-w-[95%]">
+                <pre id="whatsappMessagePreview" class="whitespace-pre-wrap font-sans text-[13.5px] leading-relaxed text-slate-800"></pre>
+                <div class="flex items-center justify-end gap-1 mt-1.5 text-[11px] text-slate-500">
+                  <span id="previewTime">Now</span>
+                  <i data-lucide="check-check" class="w-3.5 h-3.5 text-sky-500"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder Test Mode: Configurable Business WhatsApp Number -->
+          <div class="bg-white rounded-2xl p-5 border border-orange-200/80 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-saffron uppercase tracking-wider">
+                  <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+                  Founder MVP Test Setting
+                </span>
+                <p class="text-xs text-slate-600 mt-1">
+                  Enter your own WhatsApp number (with country code, e.g. <code class="bg-slate-100 px-1 rounded">919876543210</code>) to test receiving bookings directly.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-3 flex items-center gap-2">
+              <div class="relative flex-1">
+                <span class="absolute inset-y-0 left-3 flex items-center text-slate-400 text-sm font-semibold">+</span>
+                <input type="text" id="businessWhatsappNumber" value="919876543210"
+                  aria-label="Business WhatsApp Number"
+                  class="w-full pl-7 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm font-mono text-navy focus:outline-none focus:ring-2 focus:ring-tealTrust" />
+              </div>
+              <button type="button" id="saveWhatsappNumberBtn" class="px-4 py-2.5 rounded-xl bg-navy hover:bg-slate-800 text-white text-xs font-bold transition">
+                Update
+              </button>
+            </div>
+            <p id="numberSavedFeedback" class="hidden mt-1.5 text-xs font-medium text-tealTrust">
+              ✓ Test WhatsApp destination updated!
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. FAQ ACCORDION ==================== -->
+  <section id="faq" class="py-16 sm:py-24 bg-warmSand/40 border-t border-orange-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sm font-bold uppercase tracking-wider text-tealTrust">Common Questions</span>
+        <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-navy">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-white rounded-2xl border border-orange-100 shadow-sm">
+          <button type="button" class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+            <span class="font-heading font-bold text-base sm:text-lg text-navy">How do you verify the safety and background of every “Beta”?</span>
+            <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-saffron transition-transform shrink-0"></i>
+          </button>
+          <div class="faq-content px-6">
+            <p class="pb-5 text-slate-600 text-[15px] leading-relaxed">
+              Every service runner undergoes mandatory local police verification, Aadhaar &amp; PAN authentication, permanent address checks, and an in-person empathy interview. Before any visit, we share the Beta’s photo and QR ID card with you on WhatsApp.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-white rounded-2xl border border-orange-100 shadow-sm">
+          <button type="button" class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+            <span class="font-heading font-bold text-base sm:text-lg text-navy">I live abroad (NRI) / in another city. Can I book for my parents?</span>
+            <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-saffron transition-transform shrink-0"></i>
+          </button>
+          <div class="faq-content px-6">
+            <p class="pb-5 text-slate-600 text-[15px] leading-relaxed">
+              Yes! Over 60% of our bookings are made by children living away from home. Simply enter your WhatsApp number while booking, and we will create a 3-way coordination update—sharing arrival photos, doctor notes, and bills directly with you.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-white rounded-2xl border border-orange-100 shadow-sm">
+          <button type="button" class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+            <span class="font-heading font-bold text-base sm:text-lg text-navy">How do payments work for medicines, hospital bills, or groceries?</span>
+            <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-saffron transition-transform shrink-0"></i>
+          </button>
+          <div class="faq-content px-6">
+            <p class="pb-5 text-slate-600 text-[15px] leading-relaxed">
+              To ensure 100% transparency and zero cash risk, our Beta shares a photo of the itemized bill and the vendor’s/hospital’s UPI QR code on WhatsApp. You can pay the vendor directly, and pay our service fee via UPI once the task is done.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-white rounded-2xl border border-orange-100 shadow-sm">
+          <button type="button" class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+            <span class="font-heading font-bold text-base sm:text-lg text-navy">What if I need to reschedule or cancel a booking?</span>
+            <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-saffron transition-transform shrink-0"></i>
+          </button>
+          <div class="faq-content px-6">
+            <p class="pb-5 text-slate-600 text-[15px] leading-relaxed">
+              You can reschedule or cancel for free up to 2 hours before the scheduled slot simply by replying to our WhatsApp confirmation message.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-navy text-slate-300 pt-14 pb-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
+        <!-- Col 1 -->
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-saffron flex items-center justify-center text-white font-heading font-bold">
+              AGB
+            </div>
+            <div>
+              <span class="block font-heading font-bold text-lg text-white">Aapke Ghar Ka Beta</span>
+              <span class="block text-xs text-amber-400">Har Kaam Mein Apnapan</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed max-w-sm">
+            Dependable, police-verified local companions helping senior citizens and busy families with hospital visits, bank errands, tech help, and home tasks.
+          </p>
+        </div>
+
+        <!-- Col 2 -->
+        <div>
+          <h4 class="font-heading font-bold text-white text-base mb-4">Quick Links</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#services" class="hover:text-amber-400 transition">Our Services</a></li>
+            <li><a href="#trust" class="hover:text-amber-400 transition">Safety &amp; Verification</a></li>
+            <li><a href="#pricing" class="hover:text-amber-400 transition">Pricing &amp; Care Plans</a></li>
+            <li><a href="#book-now" class="hover:text-amber-400 transition">Book a Beta</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div>
+          <h4 class="font-heading font-bold text-white text-base mb-4">Care Desk &amp; Hours</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="clock" class="w-4 h-4 text-amber-400 shrink-0"></i>
+              <span>Daily Operating Hours: <strong>7:00 AM – 9:00 PM</strong></span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="message-circle" class="w-4 h-4 text-whatsapp shrink-0"></i>
+              <span id="footerWhatsappDisplay">WhatsApp Desk: +91 98765 43210</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-teal-400 shrink-0"></i>
+              <span>care@aapkegharkabeta.in</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>&copy; <span id="currentYear"></span> Aapke Ghar Ka Beta. All rights reserved.</p>
+        <p>Made with care for Indian families everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== BOOKING CONFIRMATION / FALLBACK MODAL ==================== -->
+  <div id="bookingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-orange-100 relative animate-[fadeIn_0.2s_ease-out]">
+      <button type="button" id="closeModalBtn" aria-label="Close modal" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-14 h-14 rounded-2xl bg-green-100 text-whatsappDark flex items-center justify-center mb-4">
+        <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+      </div>
+
+      <h3 class="text-2xl font-extrabold text-navy">Opening WhatsApp Desk...</h3>
+      <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+        Your booking request is ready! If WhatsApp didn’t open automatically in a new tab, use the buttons below to launch it or copy your booking details.
+      </p>
+
+      <!-- Summary Box -->
+      <div class="mt-4 bg-cream rounded-2xl p-4 border border-orange-100 max-h-52 overflow-y-auto">
+        <pre id="modalMessageSummary" class="whitespace-pre-wrap font-sans text-xs sm:text-sm text-navy leading-relaxed"></pre>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <a id="modalWhatsappDirectLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="flex-1 py-3.5 px-5 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Open WhatsApp Again</span>
+        </a>
+
+        <button type="button" id="modalCopyBtn"
+          class="py-3.5 px-5 rounded-xl border-2 border-slate-200 hover:border-navy text-navy font-bold text-sm flex items-center justify-center gap-2 transition">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          <span id="modalCopyText">Copy Message</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 bg-navy text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg">
+    <i data-lucide="check-circle" class="w-4 h-4 text-whatsapp"></i>
+    <span id="toastText">Copied to clipboard!</span>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Set default date to tomorrow for convenience
+    const dateInput = document.getElementById('preferredDate');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+    dateInput.min = new Date().toISOString().split('T')[0];
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // FAQ Accordion Toggle
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Helper: Show Toast
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = message;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 3000);
+    }
+
+    // Helper: Copy Text Safely (works in sandboxed iframes too)
+    function copyTextToClipboard(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Booking message copied to clipboard!');
+      } catch (err) {
+        showToast('Unable to copy automatically. Please select and copy.');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // Smooth Scroll & Pre-select Service from Service Cards
+    function selectServiceAndScroll(serviceName) {
+      const serviceSelect = document.getElementById('serviceCategory');
+      serviceSelect.value = serviceName;
+      updateLivePreview();
+
+      // Visual highlight on selected card
+      document.querySelectorAll('.service-card').forEach(card => {
+        if (card.dataset.service === serviceName) {
+          card.classList.add('ring-2', 'ring-saffron');
+        } else {
+          card.classList.remove('ring-2', 'ring-saffron');
+        }
+      });
+
+      document.getElementById('book-now').scrollIntoView({ behavior: 'smooth' });
+      showToast(`Selected: ${serviceName}`);
+    }
+
+    // Smooth Scroll & Pre-select Plan from Pricing Cards
+    function selectPlanAndScroll(planName) {
+      const planSelect = document.getElementById('selectedPlan');
+      planSelect.value = planName;
+      updateLivePreview();
+      document.getElementById('book-now').scrollIntoView({ behavior: 'smooth' });
+      showToast(`Selected Plan: ${planName}`);
+    }
+
+    // Format Date Nicely (e.g., 18 Nov 2026)
+    function formatDisplayDate(isoDate) {
+      if (!isoDate) return '[Select Date]';
+      const [year, month, day] = isoDate.split('-');
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${day} ${months[parseInt(month, 10) - 1]} ${year}`;
+    }
+
+    // Build Formatted WhatsApp Booking Message
+    function buildWhatsAppMessage() {
+      const name = document.getElementById('fullName').value.trim() || '[Your Name]';
+      const phone = document.getElementById('customerPhone').value.trim() || '[Your Phone]';
+      const bookingFor = document.getElementById('bookingFor').value;
+      const service = document.getElementById('serviceCategory').value;
+      const plan = document.getElementById('selectedPlan').value;
+      const dateFormatted = formatDisplayDate(document.getElementById('preferredDate').value);
+      const slot = document.getElementById('timeSlot').value;
+      const address = document.getElementById('address').value.trim() || '[Area / Landmark]';
+      const instructions = document.getElementById('instructions').value.trim();
+
+      let msg = `Namaste *Aapke Ghar Ka Beta* Team! 🙏\n`;
+      msg += `I would like to book a verified Beta:\n\n`;
+      msg += `*Customer Name:* ${name}\n`;
+      msg += `*Contact Number:* ${phone}\n`;
+      msg += `*Booking For:* ${bookingFor}\n`;
+      msg += `*Service Needed:* ${service}\n`;
+      msg += `*Preferred Plan:* ${plan}\n`;
+      msg += `*Date & Slot:* ${dateFormatted} | ${slot}\n`;
+      msg += `*Address / Landmark:* ${address}\n`;
+      if (instructions) {
+        msg += `*Special Note:* ${instructions}\n`;
+      }
+      msg += `\nPlease confirm availability and share Beta details. Thank you!`;
+      return msg;
+    }
+
+    // Update Live WhatsApp Preview Box
+    function updateLivePreview() {
+      const previewEl = document.getElementById('whatsappMessagePreview');
+      previewEl.textContent = buildWhatsAppMessage();
+    }
+
+    // Attach real-time listeners to all form inputs
+    const formInputs = ['fullName', 'customerPhone', 'bookingFor', 'serviceCategory', 'selectedPlan', 'preferredDate', 'timeSlot', 'address', 'instructions'];
+    formInputs.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', updateLivePreview);
+      el.addEventListener('change', updateLivePreview);
+    });
+
+    // Initial preview render
+    updateLivePreview();
+
+    // Copy button inside live preview card
+    document.getElementById('copyPreviewBtn').addEventListener('click', () => {
+      copyTextToClipboard(buildWhatsAppMessage());
+    });
+
+    // Business WhatsApp Number Config Handler
+    function getSanitizedBusinessNumber() {
+      const raw = document.getElementById('businessWhatsappNumber').value;
+      const digitsOnly = raw.replace(/\D/g, '');
+      return digitsOnly || '919876543210';
+    }
+
+    document.getElementById('saveWhatsappNumberBtn').addEventListener('click', () => {
+      const num = getSanitizedBusinessNumber();
+      document.getElementById('businessWhatsappNumber').value = num;
+      document.getElementById('footerWhatsappDisplay').textContent = `WhatsApp Desk: +${num}`;
+      const feedback = document.getElementById('numberSavedFeedback');
+      feedback.classList.remove('hidden');
+      setTimeout(() => feedback.classList.add('hidden'), 3000);
+    });
+
+    // Hero Secondary CTA: Quick WhatsApp Support Chat
+    document.getElementById('heroQuickWhatsappBtn').addEventListener('click', () => {
+      const businessNumber = getSanitizedBusinessNumber();
+      const supportText = encodeURIComponent('Namaste Aapke Ghar Ka Beta! I have a quick inquiry about booking assistance for my family.');
+      window.open(`https://wa.me/${businessNumber}?text=${supportText}`, '_blank', 'noopener,noreferrer');
+    });
+
+    // Form Validation & Submission
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingModal = document.getElementById('bookingModal');
+
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Validate required fields
+      let isValid = true;
+
+      const nameVal = document.getElementById('fullName').value.trim();
+      const phoneVal = document.getElementById('customerPhone').value.trim();
+      const dateVal = document.getElementById('preferredDate').value.trim();
+      const addressVal = document.getElementById('address').value.trim();
+
+      // Name validation
+      if (nameVal.length < 2) {
+        document.getElementById('err-fullName').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('err-fullName').classList.add('hidden');
+      }
+
+      // Phone validation (at least 10 digits)
+      const phoneDigits = phoneVal.replace(/\D/g, '');
+      if (phoneDigits.length < 10) {
+        document.getElementById('err-customerPhone').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('err-customerPhone').classList.add('hidden');
+      }
+
+      // Date validation
+      if (!dateVal) {
+        document.getElementById('err-preferredDate').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('err-preferredDate').classList.add('hidden');
+      }
+
+      // Address validation
+      if (addressVal.length < 5) {
+        document.getElementById('err-address').classList.remove('hidden');
+        isValid = false;
+      } else {
+        document.getElementById('err-address').classList.add('hidden');
+      }
+
+      if (!isValid) {
+        showToast('Please fill in all highlighted required fields.');
+        return;
+      }
+
+      // Generate WhatsApp URL
+      const businessNumber = getSanitizedBusinessNumber();
+      const finalMessage = buildWhatsAppMessage();
+      const encodedMessage = encodeURIComponent(finalMessage);
+      const whatsappUrl = `https://wa.me/${businessNumber}?text=${encodedMessage}`;
+
+      // Populate & Show Confirmation/Fallback Modal
+      document.getElementById('modalMessageSummary').textContent = finalMessage;
+      document.getElementById('modalWhatsappDirectLink').href = whatsappUrl;
+      bookingModal.classList.remove('hidden');
+      bookingModal.classList.add('flex');
+
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    // Modal Controls
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+      bookingModal.classList.add('hidden');
+      bookingModal.classList.remove('flex');
+    });
+
+    bookingModal.addEventListener('click', (e) => {
+      if (e.target === bookingModal) {
+        bookingModal.classList.add('hidden');
+        bookingModal.classList.remove('flex');
+      }
+    });
+
+    document.getElementById('modalCopyBtn').addEventListener('click', () => {
+      copyTextToClipboard(buildWhatsAppMessage());
+      const btnText = document.getElementById('modalCopyText');
+      btnText.textContent = 'Copied!';
+      setTimeout(() => {
+        btnText.textContent = 'Copy Message';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
